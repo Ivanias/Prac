@@ -12,26 +12,52 @@ def main():
     client.create_database("prac")
     client.switch_database("prac")
 
+    mass=[0,0,0,0,0,0,0,0,0,0]
     count=0
     json_body=[]
-    while count<=10:
-        for i in [j for j in range(11)]:
-            table={
-                    "measurement": "sec_table",
-                    "tags": {
-                            "param": i,
-                    },
-                    "fields": {
-                        "value": random.randrange(1, 100)
-                    }
+    for i in [j for j in range(10)]:
+        mass[i]=random.randrange(1, 100)
+        table={
+                "measurement": "sec_table",
+                "tags": {
+                        "param": i,
+                        "count" : count
+                },
+                "fields": {
+                    "value": mass[i]
+
                 }
+            }
+        json_body.append(table)
+    count=1
+    while count<11:
+        for y in [h for h in range(10)]:
+            #izm=random.randrange(-1, 2)
+            mass[y]=mass[y]+random.randrange(-1, 2)
+            table={
+                "measurement": "sec_table",
+                "tags": {
+                        "param": y,
+                        "count" : count
+                    },
+                "fields": {
+                    "value": mass[y]
+                    }
+            }
             json_body.append(table)
+        #json_body.append(table)
         count=count+1
+
+
+
+
     client.write_points(json_body)
     results = client.query('select * from sec_table')
-  #  points=results.get_points(tags={'param':'0'})
-  #  for i in points:
-  #      print(i)
+    points=results.get_points(tags={'param':'0'})
+   # for i in points:
+   #     print(i)
+   # for i in mass:
+   #     print(i)   
 
 if __name__ == "__main__":
     main()
