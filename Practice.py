@@ -29,9 +29,9 @@ def main():
         count=count+1
     client.write_points(json_body)
     results = client.query('select * from sec_table')
-    points=results.get_points(tags={'param':'0'})
-    for i in points:
-        print(i)
+  #  points=results.get_points(tags={'param':'0'})
+  #  for i in points:
+  #      print(i)
 
 if __name__ == "__main__":
     main()
