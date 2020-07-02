@@ -31,9 +31,13 @@ def main():
         json_body.append(table)
     count=1
     while count<11:
+        izm=random.randrange(-1, 2)
+        if izm== 0:
+            while izm==0:
+                izm=random.randrange(-1, 2)
         for y in [h for h in range(10)]:
             #izm=random.randrange(-1, 2)
-            mass[y]=mass[y]+random.randrange(-1, 2)
+            mass[y]=mass[y]+izm
             table={
                 "measurement": "sec_table",
                 "tags": {
