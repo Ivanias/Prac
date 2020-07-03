@@ -323,8 +323,9 @@ class MainWindow(QtWidgets.QMainWindow):
         styles = {'color':'r', 'font-size':'20px'}
         self.graphWidget.setLabel('left', 'Значения', **styles)
         self.graphWidget.setLabel('bottom', 'Номер измерения', **styles)
+        self.graphWidget.showGrid(x=True, y=True)
 
-        pen = pg.mkPen(color=(255, 0, 0))
+        pen = pg.mkPen(color=(255, 0, 0), width=3)
         self.data_line =  self.graphWidget.plot(self.x, self.y0, pen=pen)
         self.data_line =  self.graphWidget.plot(self.x, self.y1, pen=pen)
         self.data_line =  self.graphWidget.plot(self.x, self.y2, pen=pen)
@@ -342,6 +343,7 @@ def main():
     database()
     app = QtWidgets.QApplication(sys.argv)
     w = MainWindow()
+    w.resize(1000, 750)
     w.show()
     sys.exit(app.exec_())
 
